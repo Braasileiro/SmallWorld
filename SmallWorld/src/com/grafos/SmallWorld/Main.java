@@ -1,8 +1,11 @@
 package com.grafos.SmallWorld;
 
+import org.graphstream.graph.implementations.SingleGraph;
+
+import com.grafos.SmallWorld.Stream.DepthFirstSearch;
 import com.grafos.SmallWorld.Stream.GraphGenerator;
 
-import org.graphstream.graph.implementations.SingleGraph;
+
 
 public class Main
 {
@@ -16,7 +19,10 @@ public class Main
 			"/com/grafos/SmallWorld/Data/VerticesFacebook.txt",
 			"/com/grafos/SmallWorld/Data/ArestasFacebook.txt"
 		);
-		
+				
 		smallWorld.display();
+		
+		DepthFirstSearch dfs = new DepthFirstSearch(smallWorld);
+		dfs.Compute();
 	}
 }

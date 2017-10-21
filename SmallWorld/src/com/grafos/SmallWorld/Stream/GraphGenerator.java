@@ -5,9 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
-import org.graphstream.graph.implementations.SingleGraph;
-
 import com.grafos.SmallWorld.Utilities.Resourcer;
+
+import org.graphstream.graph.implementations.SingleGraph;
 
 public class GraphGenerator
 {
