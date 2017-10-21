@@ -11,6 +11,7 @@ import org.graphstream.graph.Node;
 
 public class DepthFirstSearch {
 	public Graph G;
+	
 	private final int VISIT_TIME = 5;
 
 	public DepthFirstSearch(Graph G) {
@@ -20,6 +21,8 @@ public class DepthFirstSearch {
 	public void Compute() {
 		Search();
 	}
+	
+	private int contNodes = 0;
 
 	public void Search() {
 		int connectedComponents = 0;
@@ -38,6 +41,8 @@ public class DepthFirstSearch {
 			ex.printStackTrace();
 		}
 		
+		String msg = "";
+		
 		// cria a fila com todos que estao brancos
 		for (Node node : G.getEachNode()) {
 			Queue<Node> queue = null;
@@ -46,13 +51,18 @@ public class DepthFirstSearch {
 				queue = new LinkedList<Node>();
 				connectedComponents++;
 				Bfs(node, queue, G);
+				
+				msg = msg + "Grafo: " + connectedComponents + " | Quantidade de vertices: " + contNodes + "\n";
+				contNodes = 0;
 			}
 		}
 		
-		JOptionPane.showMessageDialog(null, "Quantidade de componentes conexos: " + connectedComponents);
+		JOptionPane.showMessageDialog(null, msg + "\nQuantidade de componentes conexos: " + connectedComponents);
 	}
 
-	public void Bfs(Node v, Queue queue, Graph g) {		
+	public void Bfs(Node v, Queue queue, Graph g) {
+		contNodes++;
+		
 		queue.add(v);
 		v.addAttribute("ui.color", "grey");
 		v.addAttribute("ui.style", "fill-color: grey;");
