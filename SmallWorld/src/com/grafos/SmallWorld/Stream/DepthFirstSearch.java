@@ -16,7 +16,7 @@ import com.grafos.SmallWorld.Stream.MajorComponentGenerator;
 public class DepthFirstSearch {
 	public Graph G;
 	
-	private final int VISIT_TIME = 5;
+	private final int VISIT_TIME = 1;
 
 	public DepthFirstSearch(Graph G) {
 		this.G = G;
@@ -31,7 +31,7 @@ public class DepthFirstSearch {
 
 	public void Search() {
 		int componentsQuantity = 0;
-		int edgeQuantityMajorComponent = 0;
+		int nodeQuantityMajorComponent = 0;
 		int majorComponent = 0;
 		int codComponent = 0;
 		
@@ -60,8 +60,8 @@ public class DepthFirstSearch {
 				Bfs(node, queue, G, codComponent);
 				
 				// pega o id do maior componente
-				if (nodeQuantity > edgeQuantityMajorComponent) {					
-					edgeQuantityMajorComponent = nodeQuantity;
+				if (nodeQuantity > nodeQuantityMajorComponent) {					
+					nodeQuantityMajorComponent = nodeQuantity;
 					majorComponent = codComponent;
 				}
 				
@@ -75,7 +75,7 @@ public class DepthFirstSearch {
 		JOptionPane.showMessageDialog(null, "\nQuantidade de componentes conexos: " + componentsQuantity);
 		
 		// Gerar o maior componente isolado dos outros
-		MajorComponentGenerator componentGenerator = new MajorComponentGenerator(G, componentData, majorComponent);
+		MajorComponentGenerator componentGenerator = new MajorComponentGenerator(G, componentData, majorComponent, nodeQuantityMajorComponent);
 		componentGenerator.ShowComponent();
 	}
 
