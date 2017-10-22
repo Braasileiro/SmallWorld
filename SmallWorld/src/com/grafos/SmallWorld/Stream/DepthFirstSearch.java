@@ -1,13 +1,17 @@
 package com.grafos.SmallWorld.Stream;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 import javax.swing.JOptionPane;
 
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
+
+import com.grafos.SmallWorld.Stream.MajorComponentGenerator;
 
 public class DepthFirstSearch {
 	public Graph G;
@@ -22,10 +26,14 @@ public class DepthFirstSearch {
 		Search();
 	}
 	
-	private int contNodes = 0;
+	private int nodeQuantity = 0;
+	List<String> componentData = new ArrayList<String>();
 
 	public void Search() {
-		int connectedComponents = 0;
+		int componentsQuantity = 0;
+		int edgeQuantityMajorComponent = 0;
+		int majorComponent = 0;
+		int codComponent = 0;
 		
 		// para todos os nos do grafo, deixa todos vertices brancos
 		// todos sao marcados como nao visitados
@@ -41,27 +49,41 @@ public class DepthFirstSearch {
 			ex.printStackTrace();
 		}
 		
-		String msg = "";
-		
 		// cria a fila com todos que estao brancos
 		for (Node node : G.getEachNode()) {
 			Queue<Node> queue = null;
 			// se o no ainda nao foi visitado...
 			if (node.getAttribute("ui.color") == "white") {
 				queue = new LinkedList<Node>();
-				connectedComponents++;
-				Bfs(node, queue, G);
 				
-				msg = msg + "Grafo: " + connectedComponents + " | Quantidade de vertices: " + contNodes + "\n";
-				contNodes = 0;
+				// contagem de todos os vertices de UM COMPONENTE por vez
+				Bfs(node, queue, G, codComponent);
+				
+				// pega o id do maior componente
+				if (nodeQuantity > edgeQuantityMajorComponent) {					
+					edgeQuantityMajorComponent = nodeQuantity;
+					majorComponent = codComponent;
+				}
+				
+				componentsQuantity++;
+				codComponent++;	
+				
+				nodeQuantity = 0;
 			}
 		}
 		
-		JOptionPane.showMessageDialog(null, msg + "\nQuantidade de componentes conexos: " + connectedComponents);
+		JOptionPane.showMessageDialog(null, "\nQuantidade de componentes conexos: " + componentsQuantity);
+		
+		// Gerar o maior componente isolado dos outros
+		MajorComponentGenerator componentGenerator = new MajorComponentGenerator(G, componentData, majorComponent);
+		componentGenerator.ShowComponent();
 	}
 
-	public void Bfs(Node v, Queue queue, Graph g) {
-		contNodes++;
+	public void Bfs(Node v, Queue queue, Graph g, int codComponent) {
+		nodeQuantity++;
+		
+		// adiciona os dados na lista
+		componentData.add(codComponent + "-" + v);
 		
 		queue.add(v);
 		v.addAttribute("ui.color", "grey");
@@ -92,7 +114,7 @@ public class DepthFirstSearch {
 					ex.printStackTrace();
 				}
 								
-				Bfs(w, queue, g);
+				Bfs(w, queue, g, codComponent);
 			}
 		}
 		// ja visitou o v
