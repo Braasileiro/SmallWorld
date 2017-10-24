@@ -27,7 +27,8 @@ public class DepthFirstSearch {
 	}
 	
 	private int nodeQuantity = 0;
-	List<String> componentData = new ArrayList<String>();
+	List<String> nodeList = new ArrayList<String>();
+	List<String> edgeList = new ArrayList<String>();
 
 	public void Search() {
 		int componentsQuantity = 0;
@@ -42,6 +43,7 @@ public class DepthFirstSearch {
 			node.addAttribute("ui.style", "fill-color: white;");
 		}
 		
+		// tempo
 		try {
 			Thread.sleep(VISIT_TIME);
 		}
@@ -70,20 +72,19 @@ public class DepthFirstSearch {
 				
 				nodeQuantity = 0;
 			}
-		}
-		
+		}		
 		JOptionPane.showMessageDialog(null, "\nQuantidade de componentes conexos: " + componentsQuantity);
 		
 		// Gerar o maior componente isolado dos outros
-		MajorComponentGenerator componentGenerator = new MajorComponentGenerator(graph, componentData, majorComponent, nodeQuantityMajorComponent);
+		MajorComponentGenerator componentGenerator = new MajorComponentGenerator(graph, nodeList, edgeList, majorComponent, nodeQuantityMajorComponent);
 		componentGenerator.ShowComponent();
 	}
 
 	public void Bfs(Node v, Queue queue, Graph g, int codComponent) {
 		nodeQuantity++;
 		
-		// adiciona os dados na lista
-		componentData.add(codComponent + "-" + v);
+		// adiciona os dados dos vertices na lista
+		nodeList.add(codComponent + "-" + v);
 		
 		queue.add(v);
 		v.addAttribute("ui.color", "grey");
@@ -106,6 +107,10 @@ public class DepthFirstSearch {
 				// visita o w				
 				w.addAttribute("ui.color", "grey");
 				w.addAttribute("ui.style", "fill-color: grey;");
+				
+				// Adiciona os dados das arestas na lista
+				// grava somente os dados da arvore geradora
+				edgeList.add(codComponent + "-" + v + ":" + w);
 				
 				try {
 					Thread.sleep(VISIT_TIME);
