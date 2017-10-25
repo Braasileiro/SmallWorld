@@ -77,17 +77,21 @@ public class MajorComponentGenerator {
 				edge.addAttribute("ui.style", "fill-color: blue;");
 				edgeQuantityMajorComponent++;
 			}
-		}		
-		newGraph.addAttribute("ui.stylesheet", "node{ size: 3px; fill-color: #777; text-mode: hidden; z-index: 0;} " +
+		}
+		
+		// Melhorias na visualizacao
+		newGraph.addAttribute("ui.stylesheet", "node{ size: 5px; fill-color: #777; text-mode: hidden; z-index: 0;} " +
 											"edge{ shape: line; fill-color: #222; arrow-size: 3px, 2px;}");
 		newGraph.addAttribute("ui.quality");
 		newGraph.addAttribute("ui.antialias");
 		
-		newGraph.display();
-		
+		System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
+				
 		String message = "O maior componente é : " + majorComponent + // Essa linha vai sair
 				 "\nQuantidade de vertices: " + nodeQuantityMajorComponent +
 				 "\nQuantidade de arestas: "  + edgeQuantityMajorComponent;
 		JOptionPane.showMessageDialog(null, message);
+		
+		newGraph.display();
 	}
 }
