@@ -9,29 +9,29 @@ import javax.swing.JOptionPane;
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.SingleGraph;
-import org.graphstream.ui.view.Viewer;
 
 public class MajorComponentGenerator {
 	
 	private Graph graph;
 	private List<String> nodeList;
-	private List<String> edgeList;
+	private List<String> treeEdgeList;	
 	private List<Integer> auxList;
 	private int majorComponent;
 	private int nodeQuantityMajorComponent;
 	private int edgeQuantityMajorComponent = 0;
 	
-	public MajorComponentGenerator(Graph graph, List<String> nodeList, List<String> edgeList, int majorComponent, int nodeQuantityMajorComponent) {
+	public MajorComponentGenerator(Graph graph, List<String> nodeList, List<String> treeEdgeList, int majorComponent, int nodeQuantityMajorComponent) {
 		this.graph = graph;
 		this.nodeList = nodeList;
-		this.edgeList = edgeList;
+		this.treeEdgeList = treeEdgeList;
 		this.majorComponent = majorComponent;
 		this.nodeQuantityMajorComponent = nodeQuantityMajorComponent;
 	}
 	
 	public void ShowComponent(){
 		
-		Graph newGraph = new SingleGraph("Major component");
+		Graph treeMajorComp = new SingleGraph("Major component");
+		Graph graphMajorComponent = new SingleGraph("Graph Major Component");
 		
 		/*
 		 * 
@@ -51,11 +51,13 @@ public class MajorComponentGenerator {
 			if(cod == majorComponent) {
 				//System.out.println("Codigo: " + cod + "| Vertice: " + node);
 				auxList.add(Integer.parseInt(node));
-				newGraph.addNode(node);
+				treeMajorComp.addNode(node); // nos da arvore
+				graphMajorComponent.addNode(node); // nos do componente completo
 			}
 		}
 		
-		Iterator<String> iEdge = edgeList.iterator();
+		// Arestas da arvore
+		Iterator<String> iEdge = treeEdgeList.iterator();
 		while(iEdge.hasNext()) {
 			String valor = iEdge.next();
 			int cod = Integer.parseInt(valor.split("-")[0]); // pega o codigo
@@ -66,24 +68,28 @@ public class MajorComponentGenerator {
 			String node2 = aux.split(":")[1];
 			
 			if(cod == majorComponent) {
-				newGraph.addEdge(node1 + node2, node1, node2);
+				treeMajorComp.addEdge(node1 + node2, node1, node2);
 			}			
 		}
 		
 		// conta a quantidade de todas as arestas do maior componente
+		// Montagem do novo grafo com base no maior componente
 		for(Edge edge : graph.getEachEdge()) {
 			if(auxList.contains(Integer.parseInt(edge.getNode0().toString())) &&
 			   auxList.contains(Integer.parseInt(edge.getNode1().toString()))) {
 				edge.addAttribute("ui.style", "fill-color: blue;");
 				edgeQuantityMajorComponent++;
+				
+				graphMajorComponent.addEdge(edge.getId().toString(), edge.getNode0().toString(), edge.getNode1().toString());
+				
 			}
 		}
 		
 		// Melhorias na visualizacao
-		newGraph.addAttribute("ui.stylesheet", "node{ size: 5px; fill-color: #777; text-mode: hidden; z-index: 0;} " +
+		treeMajorComp.addAttribute("ui.stylesheet", "node{ size: 5px; fill-color: #777; text-mode: hidden; z-index: 0;} " +
 											"edge{ shape: line; fill-color: #222; arrow-size: 3px, 2px;}");
-		newGraph.addAttribute("ui.quality");
-		newGraph.addAttribute("ui.antialias");
+		treeMajorComp.addAttribute("ui.quality");
+		treeMajorComp.addAttribute("ui.antialias");
 		
 		System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
 				
@@ -92,6 +98,7 @@ public class MajorComponentGenerator {
 				 "\nQuantidade de arestas: "  + edgeQuantityMajorComponent;
 		JOptionPane.showMessageDialog(null, message);
 		
-		newGraph.display();
+		treeMajorComp.display();
+		graphMajorComponent.display();
 	}
 }

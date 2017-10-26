@@ -8,6 +8,7 @@ import java.util.Queue;
 
 import javax.swing.JOptionPane;
 
+import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 
@@ -28,7 +29,7 @@ public class DepthFirstSearch {
 	
 	private int nodeQuantity = 0;
 	List<String> nodeList = new ArrayList<String>();
-	List<String> edgeList = new ArrayList<String>();
+	List<String> treeEdgeList = new ArrayList<String>();
 
 	public void Search() {
 		int componentsQuantity = 0;
@@ -76,7 +77,7 @@ public class DepthFirstSearch {
 		JOptionPane.showMessageDialog(null, "\nQuantidade de componentes conexos: " + componentsQuantity);
 		
 		// Gerar o maior componente isolado dos outros
-		MajorComponentGenerator componentGenerator = new MajorComponentGenerator(graph, nodeList, edgeList, majorComponent, nodeQuantityMajorComponent);
+		MajorComponentGenerator componentGenerator = new MajorComponentGenerator(graph, nodeList, treeEdgeList, majorComponent, nodeQuantityMajorComponent);
 		componentGenerator.ShowComponent();
 	}
 
@@ -110,7 +111,7 @@ public class DepthFirstSearch {
 				
 				// Adiciona os dados das arestas na lista
 				// grava somente os dados da arvore geradora
-				edgeList.add(codComponent + "-" + v + ":" + w);
+				treeEdgeList.add(codComponent + "-" + v + ":" + w);
 				
 				try {
 					Thread.sleep(VISIT_TIME);
