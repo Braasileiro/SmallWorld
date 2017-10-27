@@ -20,7 +20,8 @@ public class MajorComponentGenerator {
 	private int nodeQuantityMajorComponent;
 	private int edgeQuantityMajorComponent = 0;
 	
-	public MajorComponentGenerator(Graph graph, List<String> nodeList, List<String> treeEdgeList, int majorComponent, int nodeQuantityMajorComponent) {
+	public MajorComponentGenerator(Graph graph, List<String> nodeList, List<String> treeEdgeList,
+								   int majorComponent, int nodeQuantityMajorComponent) {
 		this.graph = graph;
 		this.nodeList = nodeList;
 		this.treeEdgeList = treeEdgeList;
@@ -49,7 +50,6 @@ public class MajorComponentGenerator {
 			
 			// Usa apenas o maior componente
 			if(cod == majorComponent) {
-				//System.out.println("Codigo: " + cod + "| Vertice: " + node);
 				auxList.add(Integer.parseInt(node));
 				treeMajorComp.addNode(node); // nos da arvore
 				graphMajorComponent.addNode(node); // nos do componente completo
@@ -100,5 +100,9 @@ public class MajorComponentGenerator {
 		
 		treeMajorComp.display();
 		graphMajorComponent.display();
+		
+		// Busca em largura usando o maior componente
+		BreadthFirstSearch bfs = new BreadthFirstSearch(graphMajorComponent);
+		bfs.Compute();
 	}
 }

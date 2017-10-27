@@ -60,7 +60,7 @@ public class DepthFirstSearch {
 				queue = new LinkedList<Node>();
 				
 				// contagem de todos os vertices de UM COMPONENTE por vez
-				Bfs(node, queue, graph, codComponent);
+				Dfs(node, queue, graph, codComponent);
 				
 				// pega o id do maior componente
 				if (nodeQuantity > nodeQuantityMajorComponent) {					
@@ -81,7 +81,7 @@ public class DepthFirstSearch {
 		componentGenerator.ShowComponent();
 	}
 
-	public void Bfs(Node v, Queue queue, Graph g, int codComponent) {
+	public void Dfs(Node v, Queue queue, Graph g, int codComponent) {
 		nodeQuantity++;
 		
 		// adiciona os dados dos vertices na lista
@@ -120,7 +120,7 @@ public class DepthFirstSearch {
 					ex.printStackTrace();
 				}
 								
-				Bfs(w, queue, g, codComponent);
+				Dfs(w, queue, g, codComponent);
 			}
 		}
 		// ja visitou o v
