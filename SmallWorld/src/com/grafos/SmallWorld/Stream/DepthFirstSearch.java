@@ -74,7 +74,7 @@ public class DepthFirstSearch {
 				nodeQuantity = 0;
 			}
 		}		
-		JOptionPane.showMessageDialog(null, "\nQuantidade de componentes conexos: " + componentsQuantity);
+		//JOptionPane.showMessageDialog(null, "\nQuantidade de componentes conexos: " + componentsQuantity);
 		
 		// Gerar o maior componente isolado dos outros
 		MajorComponentGenerator componentGenerator = new MajorComponentGenerator(graph, nodeList, treeEdgeList, majorComponent, nodeQuantityMajorComponent);
