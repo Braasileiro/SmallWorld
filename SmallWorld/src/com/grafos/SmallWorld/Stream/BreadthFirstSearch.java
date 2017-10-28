@@ -12,7 +12,7 @@ public class BreadthFirstSearch {
 	Graph graph = new SingleGraph("Graph");
 	int nodeQuantityMajorComponent;
 	int matrizAdj[][];
-	int i, j = 0, contNode = 0;
+	int i, j, contNode = 0;
 	long somatorioAdj = 0;
 	
 	public BreadthFirstSearch(Graph graph, int nodeQuantityMajorComponent) {
@@ -57,7 +57,7 @@ public class BreadthFirstSearch {
 			}
 		}
 		
-		// Percorre a lista preenchida e exibe o resultado final
+		// Percorre e imprime a lista preenchida
 		for(int i = 0; i < nodeQuantityMajorComponent; i++) {
 			for (int j = 0; j < nodeQuantityMajorComponent; j++) {
 				if(matrizAdj[i][j] != 0) {
@@ -69,12 +69,19 @@ public class BreadthFirstSearch {
 			System.out.println();
 		}
 		
+		
+		
+		
+		
+		// Resultado		
 		System.out.println("Somatorio de adjacencias: " + somatorioAdj);
 		
 		double media = (1/((0.5*nodeQuantityMajorComponent)*(nodeQuantityMajorComponent + 1)) * somatorioAdj);
 		System.out.println("Resultado: " + media);
 		
 	}
+	
+	
 	
 	// Busca em largura
 	public void Bfs(Node node) {
@@ -111,6 +118,8 @@ public class BreadthFirstSearch {
 				
 				// Adiciona em cada linha da matriz, os vertices adj a esta linha (vertice)
 				i = Integer.parseInt(aux.getAttribute("codigo").toString());
+				j = Integer.parseInt(w.getAttribute("codigo").toString());
+				
 				matrizAdj[i][j]++;				
 				
 			}
