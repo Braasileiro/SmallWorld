@@ -20,7 +20,7 @@ public class Main
 			"/com/grafos/SmallWorld/Data/ArestasFacebook.txt"
 		);
 				
-		smallWorld.display();
+		//smallWorld.display();
 		
 		DepthFirstSearch dfs = new DepthFirstSearch(smallWorld);
 		dfs.Compute();

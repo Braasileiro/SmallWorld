@@ -87,7 +87,7 @@ public class MajorComponentGenerator {
 		
 		// Melhorias na visualizacao
 		treeMajorComp.addAttribute("ui.stylesheet", "node{ size: 5px; fill-color: #777; text-mode: hidden; z-index: 0;} " +
-											"edge{ shape: line; fill-color: #222; arrow-size: 3px, 2px;}");
+													"edge{ shape: line; fill-color: #222; arrow-size: 3px, 2px;}");
 		treeMajorComp.addAttribute("ui.quality");
 		treeMajorComp.addAttribute("ui.antialias");
 		
@@ -98,11 +98,11 @@ public class MajorComponentGenerator {
 				 "\nQuantidade de arestas: "  + edgeQuantityMajorComponent;
 		JOptionPane.showMessageDialog(null, message);
 		
-		treeMajorComp.display();
-		graphMajorComponent.display();
+		//treeMajorComp.display();
+		//graphMajorComponent.display();
 		
 		// Busca em largura usando o maior componente
-		BreadthFirstSearch bfs = new BreadthFirstSearch(graphMajorComponent);
+		BreadthFirstSearch bfs = new BreadthFirstSearch(graphMajorComponent, nodeQuantityMajorComponent);
 		bfs.Compute();
 	}
 }

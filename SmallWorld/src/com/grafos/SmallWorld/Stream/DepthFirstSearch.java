@@ -67,7 +67,7 @@ public class DepthFirstSearch {
 					nodeQuantityMajorComponent = nodeQuantity;
 					majorComponent = codComponent;
 				}
-				
+								
 				componentsQuantity++;
 				codComponent++;	
 				
