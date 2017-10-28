@@ -76,7 +76,7 @@ public class BreadthFirstSearch {
 		// Resultado		
 		System.out.println("Somatorio de adjacencias: " + somatorioAdj);
 		
-		double media = (1/((0.5*nodeQuantityMajorComponent)*(nodeQuantityMajorComponent + 1)) * somatorioAdj);
+		double media = ( (1 / 0.5) * (nodeQuantityMajorComponent * (nodeQuantityMajorComponent + 1)) ) * somatorioAdj;
 		System.out.println("Resultado: " + media);
 		
 	}
