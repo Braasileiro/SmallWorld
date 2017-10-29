@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import javax.swing.JOptionPane;
+
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
@@ -33,7 +35,6 @@ public class BreadthFirstSearch {
 			for (int j = 0; j < nodeQuantityMajorComponent; j++) {
 				matrizAdj[i][j] = 0;
 			}
-			//System.out.println("Linha: " + i + " : Conteudo: " + matrizAdj[i][j]);
 		}
 		
 		// Marca todos os vertices
@@ -57,31 +58,19 @@ public class BreadthFirstSearch {
 			}
 		}
 		
-		// Percorre e imprime a lista preenchida
+		// Percorre a lista preenchida
 		for(int i = 0; i < nodeQuantityMajorComponent; i++) {
 			for (int j = 0; j < nodeQuantityMajorComponent; j++) {
 				if(matrizAdj[i][j] != 0) {
-					System.out.println("Adjacencias: " + matrizAdj[i][j]);
 					somatorioAdj = somatorioAdj + matrizAdj[i][j];
 				}
 			}
-			System.out.println("Vertice: " + i);
-			System.out.println();
 		}
 		
-		
-		
-		
-		
-		// Resultado		
-		System.out.println("Somatorio de adjacencias: " + somatorioAdj);
-		
+		// Resultado	
 		double media = ( (1 / 0.5) * (nodeQuantityMajorComponent * (nodeQuantityMajorComponent + 1)) ) * somatorioAdj;
-		System.out.println("Resultado: " + media);
-		
+		System.out.printf("Media final: %.2f", media);
 	}
-	
-	
 	
 	// Busca em largura
 	public void Bfs(Node node) {

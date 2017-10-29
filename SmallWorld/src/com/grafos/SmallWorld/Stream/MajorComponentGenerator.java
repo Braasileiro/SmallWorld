@@ -96,10 +96,10 @@ public class MajorComponentGenerator {
 		String message = "O maior componente é : " + majorComponent + // Essa linha vai sair
 				 "\nQuantidade de vertices: " + nodeQuantityMajorComponent +
 				 "\nQuantidade de arestas: "  + edgeQuantityMajorComponent;
-		//JOptionPane.showMessageDialog(null, message);
+		JOptionPane.showMessageDialog(null, message);
 		
-		//treeMajorComp.display();
-		//graphMajorComponent.display();
+		treeMajorComp.display();
+		graphMajorComponent.display();
 		
 		// Busca em largura usando o maior componente
 		BreadthFirstSearch bfs = new BreadthFirstSearch(graphMajorComponent, nodeQuantityMajorComponent);
