@@ -4,8 +4,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import javax.swing.JOptionPane;
-
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
@@ -68,8 +66,9 @@ public class BreadthFirstSearch {
 		}
 		
 		// Resultado	
-		double media = ( (1 / 0.5) * (nodeQuantityMajorComponent * (nodeQuantityMajorComponent + 1)) ) * somatorioAdj;
-		System.out.printf("Media final: %.2f", media);
+		double media = ( 1 / ( (1 / 0.5) * (nodeQuantityMajorComponent * (nodeQuantityMajorComponent + 1)) ) * somatorioAdj );
+		System.out.println("Adjacencias: " + somatorioAdj);
+		System.out.printf("Media final: " + media);
 	}
 	
 	// Busca em largura
@@ -109,7 +108,7 @@ public class BreadthFirstSearch {
 				i = Integer.parseInt(aux.getAttribute("codigo").toString());
 				j = Integer.parseInt(w.getAttribute("codigo").toString());
 				
-				matrizAdj[i][j]++;				
+				matrizAdj[i][j] = Integer.parseInt(w.getAttribute("valor").toString());
 				
 			}
 		}
