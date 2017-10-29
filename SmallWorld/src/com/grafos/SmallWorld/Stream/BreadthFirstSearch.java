@@ -65,10 +65,13 @@ public class BreadthFirstSearch {
 			}
 		}
 		
-		// Resultado	
-		double media = ( 1 / ( (1 / 0.5) * (nodeQuantityMajorComponent * (nodeQuantityMajorComponent + 1)) ) * somatorioAdj );
+		// Resultado
+		double media_part1 = nodeQuantityMajorComponent / 2;
+		double media_part2 = nodeQuantityMajorComponent + 1;
+		double media_final = (1 / media_part1 * media_part2) * somatorioAdj;
+
 		System.out.println("Adjacencias: " + somatorioAdj);
-		System.out.printf("Media final: " + media);
+		System.out.printf("Media final: " + media_final);
 	}
 	
 	// Busca em largura
